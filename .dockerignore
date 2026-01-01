@@ -1,0 +1,59 @@
+# Git
+.git
+.gitignore
+README.md
+
+# Python cache
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+*.egg
+*.egg-info
+dist
+build
+
+# Virtual environments
+venv
+env
+ENV
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints
+*.ipynb
+
+# Data (don't copy into image - use volumes)
+data/
+*.csv
+
+# Models (don't copy into image - use volumes)
+models/
+*.onnx
+*.pkl
+
+# Docker
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Logs
+*.log
+Locust_*.html
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Notebooks
+notebooks/
+
+# Test files
+test.txt

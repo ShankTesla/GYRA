@@ -1,0 +1,62 @@
+# Environment variables (CRITICAL - contains secrets)
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+
+# Jupyter Notebooks
+.ipynb_checkpoints
+*.ipynb
+
+# Data files (too large for git)
+data/
+*.csv
+*.parquet
+*.pkl
+
+# Model files (too large for git)
+models/
+*.onnx
+*.h5
+*.pt
+*.pth
+*.joblib
+
+# Logs
+*.log
+Locust_*.html
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker volumes (not needed in git)
+postgres-data/
+kafka-data/
+redis-data/
+minio_data/
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# MLflow
+mlruns/
+mlflow.db
+
+# Prefect
+.prefect/
