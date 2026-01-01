@@ -4,11 +4,10 @@ from itertools import cycle
 from locust import HttpUser, task, between
 import time
 
-# load data
+# loading data
 test_df = pd.read_csv("./data/processed/test_stream.csv")
-# convert to dict records
+# converting to dict records with to dict
 test_records = test_df.to_dict(orient='records')
-#make it into cycle iterator that can cycle through records
 data_iterator = cycle(test_records)
 
 

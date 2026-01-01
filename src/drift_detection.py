@@ -1,7 +1,7 @@
 from evidently import Dataset
 from evidently import DataDefinition
 from evidently import Report
-from evidently.metrics import ValueDrift, DriftedColumnsCount
+from evidently.metrics import DriftedColumnsCount
 from train import load_data
 from ingest import ingest
 import pandas as pd
@@ -37,7 +37,6 @@ def detect_drift():
         ])
 
         my_eval = report.run(train_eval_data, test_eval_data)
-        # Get results for programmatic use
         #result_json = data_drift_suite.json()
         result_dict = my_eval.dict()
         print(result_dict)

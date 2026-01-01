@@ -51,7 +51,7 @@ ml_models = {}
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     
-    #this is how to get onnx session model imported
+    #import onnx session using InferenceSession
     ml_models["onnx_session"] = rt.InferenceSession('./models/model.onnx')
     yield
     ml_models.clear()

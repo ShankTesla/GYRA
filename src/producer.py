@@ -10,9 +10,8 @@ BROKER = os.getenv('KAFKA_BROKER', 'kafka:29092')
 TOPIC_NAME = 'creditcard'
 CSV_FILE_PATH = './data/processed/test_stream.csv'
 
-# Wait for Kafka to be ready
 print(f"Waiting for Kafka broker at {BROKER}...")
-for i in range(30):  # Try for 30 seconds
+for i in range(30):  # 30 seconds waiting time
     try:
         producer = KafkaProducer(
             bootstrap_servers=[BROKER],

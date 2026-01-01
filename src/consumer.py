@@ -7,11 +7,11 @@ import os
 import time
 import redis
 
-# Use environment variable or default to kafka service
+# Configs
 BROKER = os.getenv('KAFKA_BROKER', 'kafka:29092')
 TOPIC_NAME = 'creditcard'
 
-#REDIS environment
+#REDIS Configs
 r = redis.Redis(
     host='redis',
     port=6379,
@@ -23,15 +23,15 @@ sess = rt.InferenceSession('./models/model.onnx')
 input_name = sess.get_inputs()[0].name
 label_name = sess.get_outputs()[0].name
 
-# Define the exact predictors used during training
+
 predictors = ['Time', 'V1', 'V2', 'V3', 'V4', 'V5', 'V6', 'V7', 'V8', 'V9', 'V10',
               'V11', 'V12', 'V13', 'V14', 'V15', 'V16', 'V17', 'V18', 'V19',
               'V20', 'V21', 'V22', 'V23', 'V24', 'V25', 'V26', 'V27', 'V28',
               'Amount']
 
-# Wait for Kafka to be ready
+
 print(f"Waiting for Kafka broker at {BROKER}...")
-for i in range(30):  # Try for 30 seconds
+for i in range(30):  # 30 seconds waiting time
     try:
         consumer = KafkaConsumer(
             TOPIC_NAME,
@@ -52,7 +52,7 @@ print("Listening for transactions on Kafka...")
 for message in consumer:
     data_dict = message.value
     
-    # Extract only the predictor columns in the correct order
+    # Extracting only the predictor columns in the correct order so predictions can be made
     features = np.array([[data_dict[col] for col in predictors]]).astype(np.float32)
     
     prediction = sess.run([label_name], {input_name: features})

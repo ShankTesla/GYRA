@@ -109,7 +109,6 @@ services:
   
   # Prefect Server
   prefect-server:
-    # FIX: Change '3.1' to '3' to get the latest compatible version
     image: prefecthq/prefect:3-python3.11
     command: prefect server start
     ports:
@@ -117,7 +116,6 @@ services:
     environment:
       - PREFECT_SERVER_API_HOST=0.0.0.0
       - PREFECT_API_URL=http://127.0.0.1:4200/api
-    # Keep your python healthcheck
     healthcheck:
       test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:4200/api/health')"]
       interval: 10s

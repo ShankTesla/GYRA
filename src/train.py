@@ -7,12 +7,10 @@ from sqlalchemy import create_engine
 from dotenv import load_dotenv
 import pickle
 import onnxmltools
-# CHANGE THIS LINE:
 from onnxmltools.convert.common.data_types import FloatTensorType
 import pickle
 from prefect import task 
 from prefect.artifacts import create_markdown_artifact
-#MLFLOW and minio
 import mlflow
 import mlflow.onnx
 import boto3
@@ -104,7 +102,7 @@ def train(dfs):
     print(f"MLflow S3 endpoint: {os.getenv('MLFLOW_S3_ENDPOINT_URL')}")
     
     mlflow.set_tracking_uri(mlflow_uri)
-    mlflow.set_experiment("credit-card-fraud")  # ✅ Fixed typo "fraid" → "fraud"
+    mlflow.set_experiment("credit-card-fraud")
 
     train_df, test_df, valid_df, target, predictors = dfs
     num_features = len(predictors)
@@ -139,11 +137,11 @@ def train(dfs):
             verbose_eval=VERBOSE_EVAL
         )
     
-        # Get final AUC scores
+        #AUC scores
         final_train_auc = results['train']['auc'][-1]
         final_valid_auc = results['valid']['auc'][-1]
         
-        # Create markdown artifact
+        # markdown artifact
         create_markdown_artifact(
             key="model-performance",
             markdown=f'## Model Training Complete\n- **Train AUC**: {final_train_auc:.4f}\n- **Valid AUC**: {final_valid_auc:.4f}\n',
@@ -165,7 +163,6 @@ def train(dfs):
         mlflow.onnx.log_model(
             onnx_model,
             artifact_path="model"
-            # Remove registered_model_name - causing the 404 error
 )
     
     return [model, num_features, onnx_model]

@@ -10,11 +10,11 @@ def make_minio_bucket():
 #MINIO and mlflow config
     
 
-    # Tell MLflow where MinIO is
-    endpoint = os.getenv("MLFLOW_S3_ENDPOINT_URL", "http://minio:9000")
-    access_key = os.getenv("AWS_ACCESS_KEY_ID", "minioadmin")
-    secret_key = os.getenv("AWS_SECRET_ACCESS_KEY", "minioadmin")
-    bucket_name = os.getenv("MINIO_BUCKET_NAME", "mlflow")
+    # MINIO Configs
+    endpoint = os.getenv("MLFLOW_S3_ENDPOINT_URL")
+    access_key = os.getenv("AWS_ACCESS_KEY_ID")
+    secret_key = os.getenv("AWS_SECRET_ACCESS_KEY",)
+    bucket_name = os.getenv("MINIO_BUCKET_NAME")
 
     try:
         s3_client = boto3.client(
@@ -29,7 +29,7 @@ def make_minio_bucket():
             print(f'Bucket: {bucket_name} already exists')
             return True
         except:
-            # Bucket doesn't exist, create it
+            # Bucket doesn't exist then create it
             s3_client.create_bucket(Bucket=bucket_name)
             print(f'Bucket: {bucket_name} created')
             return True
